@@ -10,6 +10,7 @@ class LearningSwitch < Trema::Controller
   end
 
   def packet_in(_datapath_id, message)
+    logger.info 'パケットきたよ'
     return if message.destination_mac.reserved?
     @fdb.learn message.source_mac, message.in_port
     flow_mod_and_packet_out message
